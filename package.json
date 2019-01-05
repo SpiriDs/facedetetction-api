@@ -23,9 +23,9 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "knex": "^0.15.2",
-    "pg": "^7.6.1"
+    "pg": "^7.7.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.9"
   }
 }

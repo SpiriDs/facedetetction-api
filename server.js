@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 
 
-/* const db = knex({
+const db = knex({
     client: 'pg',
     connection: {
       host : '127.0.0.1',
@@ -14,7 +14,10 @@ const cors = require('cors');
       database : 'smart-brain'
     }
   });
- */
+
+db.select('*').from('users').then(data => {
+    console.log(data)
+});
  
 const app = express();
 
@@ -73,21 +76,19 @@ app.post('/register', (req, res) => {
         console.log(hash);
     });
 
-    database.users.push({
-        id: '4',
-        name: name,
-        email: email,
-        entries: 0,
-        joined: new Date()
+    db('users')
+        .returning('*')
+        .insert({
+            email: email,
+            name: name,
+            joined: new Date()
     })
-
-    /* db('users').insert({
-        email: email,
-        name: name,
-        joined: new Date()
-    }) */
+    .then(user => {
+        res.json(user[0]);
+    })
+    .catch(err => res.status(400).json('unable to register'))
     
-    res.json(database.users[database.users.length-1]);
+    
 })
 
 /* Profile mit user id */
