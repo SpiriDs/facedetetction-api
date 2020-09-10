@@ -19,12 +19,6 @@ const db = knex({
   },
 });
 
-db.select("*")
-  .from("users")
-  .then((data) => {
-    console.log(data);
-  });
-
 const app = express();
 
 app.use(cors());
@@ -55,7 +49,7 @@ app.post("/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("====================================");
   console.log("app is running on port 3000");
   console.log("====================================");
